@@ -4,6 +4,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --user -r requirements.txt
 
 FROM python:3.12-alpine AS runtime
+RUN apk upgrade --no-cache
 RUN addgroup -g 1001 -S appgroup && adduser -u 1001 -S appuser -G appgroup
 WORKDIR /app
 COPY --from=builder /root/.local /home/appuser/.local
